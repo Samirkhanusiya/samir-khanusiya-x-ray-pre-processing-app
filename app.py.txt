@@ -1,0 +1,15 @@
+from PIL import Image, ImageOps
+import streamlit as st
+
+uploaded_file = st.file_uploader("Upload an X-ray", type=["png", "jpg", "jpeg"])
+if uploaded_file is not None:
+    image = Image.open(uploaded_file)
+    st.image(image, caption="Original Image")
+
+    # Grayscale
+    gray = ImageOps.grayscale(image)
+    st.image(gray, caption="Grayscale")
+
+    # Equalization
+    equalized = ImageOps.equalize(gray)
+    st.image(equalized, caption="Equalized")
